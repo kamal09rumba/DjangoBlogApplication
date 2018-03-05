@@ -1,0 +1,105 @@
+/**
+1. Topbar
+2. Comment Box
+3. Detail Page
+4. Latest Post
+**/
+body{
+    /*background-color:  #FFFFFF;*/
+}
+a {
+  text-decoration: none !important; /* no underline */
+}
+/* 1. Topbar */
+#topbar{
+    background-color:#BCD6B5;
+}
+.topbar-icons{
+    line-height: 29px;
+    text-align:  right;
+    position: relative;
+    right:  0px;
+}
+.topbar-icons a{
+    margin: 5px;
+    color: #292B2C;
+}
+.fb:hover{
+    color: #405D9B;
+}
+.twitter:hover{
+    color: #00aced;
+}
+.instagram:hover{
+    color: #bc2a8d;
+}
+.rssfeed:hover{
+    color: #EC971F;
+}
+
+
+/** 2. comment box **/
+.comment-container{
+    /*background: #F5F5F5;*/
+    background: rgba(232,232,232,0.73);
+    border-radius: 10px;
+    padding: 2px 15px 8px 15px;
+}
+.comment-box,.share-box{
+    /*width: 1163px;*/
+    /*background: #F5F5F5;*/
+    background: rgba(232,232,232,0.73);
+    border-radius: 10px;
+    /*overflow: hidden;*/
+    /*display: -webkit-box;*/
+    /*display: -webkit-flex;*/
+    /*display: -moz-box;*/
+    /*display: -ms-flexbox;*/
+    /*display: flex;*/
+    /*flex-wrap: wrap;*/
+    /*justify-content: space-between;*/
+    /*align-items: center;*/
+    padding: 20px 0px 0px 20px;
+}
+.comment-box form textarea,.share-box textarea{
+     font-size: 12px;
+     line-height: 21px;
+     color: #444444;
+     border: 1px solid #e6e6e6;
+     width: 95%;
+     max-width: 100%;
+     height: 168px;
+     min-height: 168px;
+     padding: 6px 9px 6px 9px;
+}
+.share-box input,.comment-box input{
+    line-height: 21px;
+    height: 2.5em;
+    border: 1px solid #e6e6e6;
+    width: 95%;
+    padding-left: 0.5em;
+}
+.comment-info{
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  padding: 10px 10px 10px 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.comment-info span{
+  display: inline;
+}
+/** 3. Detail Page **/
+.detail-page-bar i{
+    padding-left: .5em;
+}
+
+
+/** 4. Latest Post **/
+.sidebar-header,.sidebar-post{
+    /*background: #F5F5F5;*/
+    background: rgba(232,232,232,0.73);
+}
+.sidebar-header h2,.sidebar-post h3{
+    padding: 8px 0px 8px 16px;
+}

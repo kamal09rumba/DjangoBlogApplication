@@ -1,0 +1,80 @@
+{% load blog_tags %}{# loading custom template tag 'blog_tags'#}
+{% load staticfiles %}
+{# https://docs.djangoproject.com/en/1.8/topics/templates/ #}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link rel="stylesheet" href="{% static "css/lib/bootstrap/css/bootstrap.min.css" %}"> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+    <!-- <script src="{% static "css/lib/bootstrap/js/bootstrap.min.js" %}"></script> -->
+
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static "css/blog.css" %}">
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div id="topbar" class="container-fluid">
+        <div class="topbar-icons">
+                <a class="fb" href="#" target="__blank" data-toggle="tooltip" data-placement="bottom" title="Follow Us On Facebook">
+                    <i class="fa fa-facebook-f"></i>
+                </a>
+                <a class="twitter" href="#" target="__blank" data-toggle="tooltip" data-placement="bottom" title="Follow Us On Twitter">
+                    <i class="fa fa-twitter"></i>
+                </a>
+                <a class="instagram" href="#" target="__blank" data-toggle="tooltip" data-placement="bottom" title="Follow Us On Instragram">
+                    <i class="fa fa-instagram"></i>
+                </a>
+                <a class="rssfeed" href="{% url "blog:post_feed"%}" target="__blank" data-toggle="tooltip" data-placement="bottom" title="Subscribe To Our Latest Rss Feed"><i class="fa fa-rss"></i></a>
+        </div>
+</div>
+<div class="container">
+    <div class="text-center">
+        <a href="{% url "blog:post_list" %}">
+            <img src="{% static "img/logo.png"%}" class="img-responsive center-block"></img>
+        </a>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+
+        <div id="content" class="col-sm-8">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        <div id="sidebar" class="col-sm-4">
+            <!-- <h1><a href="{% url "blog:post_list" %}">My Blog</a></h1>
+            <p>This is my blog. I have written {% total_post %} posts so far. </p> -->
+            <div class="sidebar-header">
+                <h2>Latest Posts</h2>
+            </div>
+            {% show_latest_posts 3%}
+
+
+            <div class="sidebar-post">
+                <h3>Most Commented Post</h3>
+            </div>
+            {% get_most_commented_posts as most_commented_posts %}
+            <ul>
+                {% for post in most_commented_posts %}
+                    <li><a href="{{post.get_absolute_url}}">{{post.title}}</a></li>
+                {% endfor%}
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<script type="text/javascript" src="{% static "js/main.js" %}"></script>
+</body>
+</html>

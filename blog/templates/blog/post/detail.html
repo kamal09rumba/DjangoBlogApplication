@@ -1,0 +1,70 @@
+{% extends "blog/base.html"%}
+{% load blog_tags %}
+{%block title %}{{post.title}}{%endblock%}
+
+{% block content %}
+        <hr>
+        <h1><strong>{{post.title}}</strong></h1>
+        <br>
+        <p class="detail-page-bar">
+            <i class="fa fa-user"></i> <strong>{{post.author}}</strong>
+            <i class="fa fa-calendar"></i> {{post.publish}}
+            <i class="fa fa-tags"></i>
+             {% for tag in post.tags.all %}
+                <a href="{% url "blog:post_list_by_tag" tag.slug %}">{{tag.name}}</a>
+                {% if not forloop.last %},{% endif %}
+            {% endfor%}
+
+            {% with comments.count as total_comments %}
+            <i class="fa fa-comments"></i> {{ total_comments }}
+            {% endwith %}
+        </p>
+        {# {{post.body}} #}
+        <br>
+        {{post.body|markdown}}
+        <br>
+        <p><a href="{% url "blog:post_share" post.id%}">Share This Post</a></p>
+<h2>Similar Post</h2>
+{% for post in similar_posts %}
+<p><a href="{{ post.get_absolute_url }}">{{post.title}}</a></p>
+{% empty %}
+<p>There are no similar post yet.</p>
+{% endfor %}
+
+
+<div class="comment-container">
+    {% with comments.count as total_comments %}
+        <h2>{{ total_comments }} comment{{ total_comments|pluralize}}</h2>
+    {% endwith %}
+</div>
+<br>
+<div class="comment-container">
+{% for comment in comments %}
+    <div class="comment-info">
+           <!-- Comment {{ forloop.counter}} by  -->
+            <p><span class="h5"><strong>{{comment.name|title }}</strong></span> | {{comment.created}}</p>
+        <hr>
+      {#  {{comment.body|linebreaks}} #}
+      {{ comment.body|markdown }}
+    </div>
+{% empty %}
+    <p>No one made the comment yet !!!</p>
+{% endfor %}
+</div>
+<br>
+
+{% if new_comment %}
+    <h2>Your Comment Has been added </h2>
+{% else %}
+        <div class="comment-box">
+        <h4><strong>LEAVE A REPLY</strong></h4>
+            <form action="." method="post">
+                {{ comment_form.as_p }}
+                {% csrf_token %}
+                <input class="btn btn-primary" type="submit" value="Submit Your Comment">
+            </form>
+        </div>
+{% endif %}
+
+
+{% endblock %}
